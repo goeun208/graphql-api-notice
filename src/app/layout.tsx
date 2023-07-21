@@ -1,4 +1,7 @@
-import './globals.css'
+"use client"
+import './globals.css';
+import ReactQueryProvider from "./ReactQueryProvider";
+import {RecoilRoot} from "recoil";
 
 export const metadata = {
   title: 'Create Next App',
@@ -12,7 +15,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body className="overflow-y-scroll">
+        <RecoilRoot>
+          <ReactQueryProvider>{children}</ReactQueryProvider>
+        </RecoilRoot>
+      </body>
     </html>
   )
 }

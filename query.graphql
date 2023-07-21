@@ -1,0 +1,14 @@
+query getRcNotice(
+    $limit: Int
+    $offset: Int
+) {
+    rc_notice(
+        limit: $limit
+        offset: $offset
+    ) {
+        title
+        category
+        contents
+        created_at
+    }
+}
