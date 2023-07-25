@@ -24,6 +24,7 @@ const currentNotice: any = graphql(/* GraphQL */ `
 
 const NoticeEdit = ({ params }: { params: { id: string } }) => {
     const API_URL: any = process.env.NEXT_PUBLIC_API_URL;
+    const SECRET_KEY: any = process.env.NEXT_PUBLIC_PUBLIC_KEY;
     const editId = params.id;
 
     const defaultValue = {
@@ -56,7 +57,7 @@ const NoticeEdit = ({ params }: { params: { id: string } }) => {
             currentNotice,
             { id: editId}, // router props로 불러오기
             {
-            'X-Hasura-Admin-Secret': 'aniauto-dev',
+            'X-Hasura-Admin-Secret': SECRET_KEY,
             }
         )
     })

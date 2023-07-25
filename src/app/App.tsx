@@ -4,7 +4,7 @@ import request from 'graphql-request'
 import { QueryClient, useQuery, useMutation } from '@tanstack/react-query'
 // import Film from './Film'
 import { graphql } from '../gql'
-import NoticeItem from './noticeItem'
+import NoticeItem from './components/noticeItem'
 import { UUID } from 'crypto'
 
 export interface Noticeprops {
@@ -36,6 +36,7 @@ const allNotice = graphql(/* GraphQL */ `
 function App() {
 
   const API_URL: any = process.env.NEXT_PUBLIC_API_URL;
+  const SECRET_KEY: any = process.env.NEXT_PUBLIC_PUBLIC_KEY;
   const { data } = useQuery({
     queryKey: ['allNotice'],
     queryFn: async () =>
@@ -45,7 +46,7 @@ function App() {
         // variables are type-checked too!
         { limit: 30, offset: 0 },
         {
-          'X-Hasura-Admin-Secret': 'aniauto-dev',
+          'X-Hasura-Admin-Secret': SECRET_KEY,
         }
       ),
   })

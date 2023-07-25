@@ -5,7 +5,7 @@ import { UUID } from "crypto";
 import request from 'graphql-request'
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { Noticeprops } from "./App";
+import { Noticeprops } from "../App";
 
 const deleteNotice: any = graphql(/* GraphQL */ `
         mutation deleteNotice(
@@ -21,6 +21,7 @@ const deleteNotice: any = graphql(/* GraphQL */ `
 
 const NoticeItem = ({ id, title, category, contents }:Noticeprops) => {
     const API_URL: any = process.env.NEXT_PUBLIC_API_URL;
+    const SECRET_KEY: any = process.env.NEXT_PUBLIC_PUBLIC_KEY;
     const deleteMutation: any =
        (_id: UUID) => {
         request(
@@ -28,7 +29,7 @@ const NoticeItem = ({ id, title, category, contents }:Noticeprops) => {
                 deleteNotice,
                 { id: _id},
                 {
-                    'X-Hasura-Admin-Secret': 'aniauto-dev',
+                    'X-Hasura-Admin-Secret': SECRET_KEY,
                 }
             )          
        }
