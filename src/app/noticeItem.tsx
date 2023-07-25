@@ -3,6 +3,9 @@ import Link from "next/link";
 import { graphql } from "@/gql";
 import { UUID } from "crypto";
 import request from 'graphql-request'
+import ModeEditIcon from '@mui/icons-material/ModeEdit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { Noticeprops } from "./App";
 
 const deleteNotice: any = graphql(/* GraphQL */ `
         mutation deleteNotice(
@@ -16,7 +19,7 @@ const deleteNotice: any = graphql(/* GraphQL */ `
         }
     `)
 
-const NoticeItem = ({e}:any) => {
+const NoticeItem = ({ id, title, category, contents }:Noticeprops) => {
     const API_URL: any = process.env.NEXT_PUBLIC_API_URL;
     const deleteMutation: any =
        (_id: UUID) => {
@@ -37,18 +40,22 @@ const NoticeItem = ({e}:any) => {
     }
 
     return (
-        <div className="flex w-[40rem] justify-between items-center oevrflow-hidden py-3 px-4">
-            <div className="w-[30rem]">
-                <div className="w-[6rem] rounded-2xl mb-3 text-center border border-[#5048e5]">{e.category}</div>
-                <div><span className="text-[#5048e5] font-bold">{e.title}</span></div>
-                <div>{e.contents}</div>
-            </div>
-            <div>
-                <Link href={`/edit/${e.id}`}>
-                    <button type="button" className="border bg-sky-300 px-2 rounded-md mr-2">수정</button>
-                </Link>
+        <div className="flex justify-center items-center oevrflow-hidden py-3 px-4">
+            <div className="w-[50rem] flex items-center">
+                <div className="w-[6rem] h-[2rem] rounded-2xl mr-5 text-center border border-[#5048e5] pt-[1px]">{category}</div>
+                <div  className="w-[40rem]" >
+                    <div><span className="text-[1.125rem] text-[#5048e5] font-bold">{title}</span></div>
+                    <div>{contents}</div>
+                </div>
                 
-                <button type="button" className="border bg-red-300 px-2 rounded-md" onClick={() => deleteFn(e.id)}>삭제</button>
+            </div>
+            <div className="flex justify-between items-center w-[4rem]">
+                <Link href={`/edit/${id}`}>
+                    <ModeEditIcon /> 
+                    {/* <button type="button" className="bg-sky-300 px-3 py-1 rounded-md mr-2 ">수정</button> */}
+                </Link>
+                <DeleteIcon onClick={() => deleteFn(id)} />
+                {/* <button type="button" className="bg-red-300 px-3 py-1 rounded-md" onClick={() => deleteFn(e.id)}>삭제</button> */}
             </div>
             
         </div>

@@ -5,7 +5,16 @@ import { QueryClient, useQuery, useMutation } from '@tanstack/react-query'
 // import Film from './Film'
 import { graphql } from '../gql'
 import NoticeItem from './noticeItem'
- 
+import { UUID } from 'crypto'
+
+export interface Noticeprops {
+    id: UUID;
+    title: string;
+    category: string;
+    contents: string;
+    created_at: Date;
+}
+
 const allNotice = graphql(/* GraphQL */ `
     query getRcNotice(
         $limit: Int
@@ -42,17 +51,19 @@ function App() {
   })
  
   return (
-    <div className="App">
-      <div className='h-[3rem] bg-[#5048e5] mb-2'>
-        <h1 className='text-[1.4rem] font-bold text-white p-2'>공지사항</h1>
+    <div>
+      <div className='flex justify-center items-center w-full h-[25rem] bg-[#5048e5] mb-10' style={{
+        background: 'rgb(97,149,206) linear-gradient(94deg, rgba(97,149,206,1) 0%, rgba(80,72,229,1) 78%)'
+      }}>
+        <h1 className=' text-[2.75rem] text-center font-bold text-white p-2'>공지사항</h1>
       </div>
       
       {
         data &&
         <ul>
-          {data.rc_notice?.map((e:any, i:number) => e && 
-            <div key={i} className='border border-black rounded-md mb-[10px] p-[10px]'>
-              <NoticeItem e={e} />
+          {data.rc_notice?.map((e: Noticeprops, i:number) => e && 
+            <div key={i} className='w-[60rem] mx-auto border border-[#eee] rounded-md mb-4 p-[10px] cursor-pointer'>
+              <NoticeItem id={e.id} title={e.title} category={e.category} contents={e.contents} created_at={e.created_at} />
             </div>
           )}
         </ul>
