@@ -2,10 +2,10 @@
 import React from 'react'
 import request from 'graphql-request'
 import { QueryClient, useQuery, useMutation } from '@tanstack/react-query'
-// import Film from './Film'
 import { graphql } from '../gql'
 import NoticeItem from './components/noticeItem'
 import { UUID } from 'crypto'
+import Alarm from './components/alarm'
 
 export interface Noticeprops {
     id: UUID;
@@ -32,7 +32,7 @@ const allNotice = graphql(/* GraphQL */ `
         }
     }
 `)
- 
+
 function App() {
 
   const API_URL: any = process.env.NEXT_PUBLIC_API_URL;
@@ -53,11 +53,16 @@ function App() {
  
   return (
     <div>
-      <div className='flex justify-center items-center w-full h-[25rem] bg-[#5048e5] mb-10' style={{
-        background: 'rgb(97,149,206) linear-gradient(94deg, rgba(97,149,206,1) 0%, rgba(80,72,229,1) 78%)'
-      }}>
-        <h1 className=' text-[2.75rem] text-center font-bold text-white p-2'>공지사항</h1>
+      <div>
+        <Alarm data={data}/>
+        <div className='flex justify-center items-center w-full h-[25rem] bg-[#5048e5] mb-10' style={{
+          background: 'rgb(97,149,206) linear-gradient(94deg, rgba(97,149,206,1) 0%, rgba(80,72,229,1) 78%)'
+        }}>
+          
+          <h1 className=' text-[2.75rem] text-center font-bold text-white p-2'>공지사항</h1>
+        </div>
       </div>
+      
       
       {
         data &&

@@ -34,7 +34,7 @@ const NoticeEdit = ({ params }: { params: { id: string } }) => {
     }
     const [category, setCategory] = useState<string>(defaultValue.category);  
     const [title, setTitle] = useState<string>(defaultValue.title);  
-    const [contents, setContents] = useState<string>(defaultValue.contents);    
+    const [contents, setContents] = useState<string>(defaultValue.contents);
 
     const router = useRouter();
 
@@ -100,7 +100,7 @@ const NoticeEdit = ({ params }: { params: { id: string } }) => {
                 updateNotice,
                 { id: _id, title: _title, category: _category, contents: _contents },
                 {
-                    'X-Hasura-Admin-Secret': 'aniauto-dev',
+                    'X-Hasura-Admin-Secret': SECRET_KEY,
                 }
             )
         alert('변경 되었습니다.')
