@@ -1,11 +1,13 @@
 import type { CodegenConfig } from '@graphql-codegen/cli';
 
+const SECRET_KEY: any = process.env.NEXT_PUBLIC_PUBLIC_KEY;
+
 const config: CodegenConfig = {
   overwrite: true,
   schema: {
-      'http://192.168.0.62/v1/graphql': {
+      'http://server-url/graphql': {
       headers: {
-        'X-Hasura-Admin-Secret': 'aniauto-dev',
+        'X-Hasura-Admin-Secret': SECRET_KEY,
       },
     } 
   },

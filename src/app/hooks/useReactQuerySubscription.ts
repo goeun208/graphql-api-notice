@@ -27,7 +27,7 @@ export const useReactQuerySubscription = () => {
     useEffect(() => {
       const WS_URL: any = process.env.NEXT_PUBLIC_WS_URL;
       const SECRET_KEY: any = process.env.NEXT_PUBLIC_PUBLIC_KEY;
-      const websocket = new WebSocket(`ws://192.168.0.62/v1/graphql`, 'graphql-ws');
+      const websocket = new WebSocket(`ws://server-url/v1/graphql`, 'graphql-ws');
       websocket.onopen = () => {
         console.log('connected')
       }
